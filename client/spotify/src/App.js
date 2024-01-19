@@ -8,7 +8,8 @@ import { AnimatePresence } from 'framer-motion'
 import { validateUser } from './components/api'
 import { useStateValue } from './contex/stateprovider'
 import { actionType } from './contex/reducer'
-import Dashboard from './Dashboard'
+import Dashboard from './components/Dashboard'
+
 const App = () => {
 
   const firebaseAuth = getAuth(app);
@@ -59,7 +60,7 @@ const App = () => {
 
           <Route path='/login' element={<Login setAuth={setAuth} />} />
           <Route path='/*' element={<Home />} />
-          {/* <Route path='dashboard/*' element={<Dashboard/>}></Route> */}
+          <Route path='dashboard/*' element={<Dashboard/>}></Route>
 
         </Routes>
       </div>

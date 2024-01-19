@@ -63,5 +63,40 @@ const updateUserData = async (decodeValue, req, res) => {
   }
 };
 
+router.get('/getUsers' , async (req , res) => {
+   const cursor = await user.find({});
+   if(cursor) {
+     return res.status(201).send({success : true , data : cursor})
+   }
+   else {
+     return res.status(400).send({ success: false, msg: "noa data found " });
+   }
+}) 
+
+
+router.put('/updateRole/:userId' , async( req ,res ) => {
+   const filter =  {_id : req.params.userId} ;
+   const role = req.body.data.role 
+    try {
+    const results = await user.findOneAndUpdate(filter , {role : role });
+    res.status(201).send({ user : results });
+       
+  } catch (error) {
+    return res.status(400).send({ success: false, msg: error });
+  }
+    
+})
 
 module.exports = router;
+
+
+router.delete('/deleteuser/:userId' , async (req , res) => {
+   const filter = {_id : req.params.userId}
+
+   const result = await user.deleteOne(filter);
+   if(result.deletedCount  === 1  ) {
+     res.status(200).send({success : true , msg : 'user removed' })
+   }else {
+     res.status(500).send({success : false , msg : "user not found "});
+   }
+})
