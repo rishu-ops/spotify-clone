@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const baseURL = "http://localhost:4000/";
@@ -16,21 +17,30 @@ export const validateUser = async (token) => {
   }
 };
 
-export const getAllUers = async () => {
-   try {
-    const res  =  await axios.get(`${baseURL}api/users/getUsers`); 
-    console.log("getuser" , res.data);
-     return res?.data;
-     
-   } catch (error) {
-    console.log(error);
-   }
-}
-
 export const getAllArtist = async () => {
   try {
     const res = await axios.get(`${baseURL}api/artist/getAll`);
-    return res?.data;
+    console.log("artist" , res.data.artist);
+    return res.data.artist; 
+  } catch (error) {
+    return null;
+  }
+};
+
+export const deleteArtistById = async (artistId) => {
+  try {
+    const res = await axios.delete(`${baseURL}api/artist/delete/${artistId}`);
+    return res.data.artist;
+  } catch (error) {
+    console.error('Error deleting artist:', error);
+    return null;
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    const res = await axios.get(`${baseURL}api/users/getUsers`);
+    return res.data;
   } catch (error) {
     return null;
   }
@@ -48,11 +58,14 @@ export const removeUser = async (userId) => {
 export const getAllSongs = async () => {
   try {
     const res = await axios.get(`${baseURL}api/songs/getAll`);
-    return res.data;
+    console.log("data", res.data.songs);
+    return res.data.songs;
   } catch (error) {
+    console.error("Error fetching songs:", error);
     return null;
   }
 };
+
 
 export const getAllAlbums = async () => {
   try {
@@ -63,6 +76,17 @@ export const getAllAlbums = async () => {
   }
 };
 
+export const deleteAlbumById = async (albumId) => {
+  
+  try {
+    const res = await axios.delete(`${baseURL}api/albums/delete/${albumId}`);
+    return res.data.album;
+    
+  } catch (error) {
+    console.error('Error deleting album:', error);
+    return null;
+  }
+};
 export const changingUserRole = async (userId, role) => {
   try {
     const res = axios.put(`${baseURL}api/users/updateRole/${userId}`, {
@@ -77,7 +101,7 @@ export const changingUserRole = async (userId, role) => {
 export const saveNewArtist = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/artist/save`, { ...data });
-    return (await res).data.artist;
+    return  (await res).data.artist;
   } catch (error) {
     return null;
   }
@@ -109,4 +133,3 @@ export const deleteSongById = async (id) => {
     return null;
   }
 };
-

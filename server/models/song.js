@@ -22,7 +22,7 @@ const songSchema = mongoose.Schema({
     },
     language : {
         type: String,
-        required : true
+        
     } ,
     category : {
         type: String,

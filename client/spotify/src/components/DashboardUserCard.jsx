@@ -55,7 +55,6 @@ const DashboardUserCard = ({ data, index }) => {
       transition={{ duration: 0.3, delay: index * 0.1 }}
       className="relative w-full rounded-md flex items-center justify-between py-4 bg-lightOverlay cursor-pointer hover:bg-card hover:shadow-md"
     >
-      
       {data._id !== user?.user._id && (
         <motion.div
           whileTap={{ scale: 0.75 }}
