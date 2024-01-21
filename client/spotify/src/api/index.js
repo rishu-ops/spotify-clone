@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const baseURL = "http://localhost:4000/";
 
 export const validateUser = async (token) => {
@@ -101,7 +100,7 @@ export const changingUserRole = async (userId, role) => {
 export const saveNewArtist = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/artist/save`, { ...data });
-    return  (await res).data.artist;
+    return  (await res)?.data.artist;
   } catch (error) {
     return null;
   }
@@ -110,7 +109,7 @@ export const saveNewArtist = async (data) => {
 export const saveNewAlbum = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/albums/save`, { ...data });
-    return (await res).data.album;
+    return (await res)?.data.album;
   } catch (error) {
     return null;
   }
@@ -119,7 +118,7 @@ export const saveNewAlbum = async (data) => {
 export const saveNewSong = async (data) => {
   try {
     const res = axios.post(`${baseURL}api/songs/save`, { ...data });
-    return (await res).data.songs;
+    return (await res)?.data.songs;
   } catch (error) {
     return null;
   }

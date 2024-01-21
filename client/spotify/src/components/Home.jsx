@@ -93,9 +93,9 @@ const Home = () => {
   }, [languageFilter]);
 
    
-  useEffect(() => {
-    setFilteredSongs(null)
-  } , [] )
+   useEffect(() => {
+     setFilteredSongs(null)
+   } , [] )
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
