@@ -10,8 +10,8 @@ router.post('/save' , async (req, res) => {
       
           }) 
      try {
-        const saveAlbum = await newAlbum.save();
-        return res.status(201).send({ success : true , album : saveAlbum });
+        const saveAlbum = await newAlbum?.save();
+        return res?.status(201).send({ success : true , album : saveAlbum });
      } catch (error) {
         return res.status(501).send({success : false , message : error});
      }

@@ -30,7 +30,7 @@ const Home = () => {
       getAllSongs().then((data) => {
         dispatch({
           type: actionType.SET_ALL_SONGS,
-          allSongs: data.data,
+          allSongs: data,
         });
       });
     }
@@ -51,6 +51,7 @@ const Home = () => {
     }
   }, [searchTerm]);
 
+   
   useEffect(() => {
     const filtered = allSongs?.filter((data) => data.artist === artistFilter);
     if (filtered) {
@@ -90,6 +91,11 @@ const Home = () => {
       setFilteredSongs(null);
     }
   }, [languageFilter]);
+
+   
+  useEffect(() => {
+    setFilteredSongs(null)
+  } , [] )
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">

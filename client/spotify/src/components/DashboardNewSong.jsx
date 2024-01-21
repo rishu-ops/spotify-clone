@@ -167,24 +167,17 @@ const DashboardNewSong = () => {
   useEffect(() => {
     if (!artists) {
       getAllArtist().then((data) => {
-        dispatch({ type: actionType.SET_ARTISTS, artists: data.data });
+        dispatch({ type: actionType.SET_ARTISTS, artists: data });
       });
     }
 
     if (!allAlbums) {
       getAllAlbums().then((data) => {
-        dispatch({ type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data });
+        dispatch({ type: actionType.SET_ALL_ALBUMNS, allAlbums: data.album });
       });
     }
   }, []);
 
-  const calculateTime = (sec) => {
-    const minutes = Math.floor(sec / 60);
-    const returnMin = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    const seconds = Math.floor(sec % 60);
-    const returnSec = seconds < 10 ? `0${seconds}` : `${seconds}`;
-    return `${returnMin} : ${returnSec}`;
-  };
 
   const deleteImageObject = (songURL, action) => {
     if (action === "image") {
@@ -227,10 +220,11 @@ const DashboardNewSong = () => {
       };
 
       saveNewSong(data).then((res) => {
-        getAllSongs().then((songs) => {
-          dispatch({ type: actionType.SET_ALL_SONGS, allSongs: songs.data });
+        getAllSongs().then((data) => {
+          dispatch({ type: actionType.SET_ALL_SONGS, allSongs: data });
         });
       });
+
       setSetAlert("success");
       setAlertMsg("Data saved successfully");
       setTimeout(() => {
@@ -412,8 +406,8 @@ export const AddNewArtist = () => {
         instagram: instagram,
       };
       saveNewArtist(data).then((res) => {
-        getAllArtist().then((artistData) => {
-          dispatch({ type: actionType.SET_ARTISTS, artists: artistData.data });
+        getAllArtist().then((data) => {
+          dispatch({ type: actionType.SET_ARTISTS, artists : data });
         });
       });
       setIsArtist(false);
@@ -564,10 +558,10 @@ export const AddNewAlbum = () => {
         imageURL: artistCoverImage,
       };
       saveNewAlbum(data).then((res) => {
-        getAllAlbums().then((albumData) => {
+        getAllAlbums().then((data) => {
           dispatch({
             type: actionType.SET_ALL_ALBUMNS,
-            albumData: albumData.data,
+            albumData: data.album,
           });
         });
       });

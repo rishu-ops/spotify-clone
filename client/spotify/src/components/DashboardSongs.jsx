@@ -140,7 +140,7 @@ export const SongCard = ({ data, index }) => {
         getAllSongs().then((data) => {
           dispatch({
             type: actionType.SET_ALL_SONGS,
-            allSongs: data.data,
+            allSongs: data,
           });
         });
         setTimeout(() => {

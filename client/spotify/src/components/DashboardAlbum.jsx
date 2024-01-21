@@ -6,6 +6,7 @@ import { MdDelete } from "react-icons/md";
 import { actionType } from "../Context/reducer";
 import { getAllAlbums } from "../api";
 import { deleteAlbumById  } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const DashboardAlbum = () => {
   const [{ allAlbums }, dispatch] = useStateValue();
@@ -33,7 +34,8 @@ const DashboardAlbum = () => {
 export const AlbumCard = ({ data, index }) => {
   const [isDelete, setIsDelete] = useState(false);
   const [{ allAlbums }, dispatch] = useStateValue();
-  
+  const navigate = useNavigate();
+
   const handleDelete = async () => {
     try {
       await deleteAlbumById(data._id);
@@ -41,7 +43,7 @@ export const AlbumCard = ({ data, index }) => {
       // Now, you might want to update the state or refetch the album data
       // For simplicity, you can refetch all albums
       const updatedAlbums = await getAllAlbums();
-      dispatch({ type: actionType.SET_ALL_ALBUMS, allAlbums: updatedAlbums });
+      dispatch({ type: actionType.SET_ALL_ALBUMNS, allAlbums: updatedAlbums.album });
     } catch (error) {
       console.error('Error deleting album:', error);
     }

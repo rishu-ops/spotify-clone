@@ -21,7 +21,7 @@ export const getAllArtist = async () => {
   try {
     const res = await axios.get(`${baseURL}api/artist/getAll`);
     console.log("artist" , res.data.artist);
-    return res.data.artist; 
+    return res?.data.artist; 
   } catch (error) {
     return null;
   }
@@ -30,7 +30,7 @@ export const getAllArtist = async () => {
 export const deleteArtistById = async (artistId) => {
   try {
     const res = await axios.delete(`${baseURL}api/artist/delete/${artistId}`);
-    return res.data.artist;
+    return res?.data.artist;
   } catch (error) {
     console.error('Error deleting artist:', error);
     return null;
@@ -40,7 +40,7 @@ export const deleteArtistById = async (artistId) => {
 export const getAllUsers = async () => {
   try {
     const res = await axios.get(`${baseURL}api/users/getUsers`);
-    return res.data;
+    return res?.data;
   } catch (error) {
     return null;
   }
@@ -59,7 +59,7 @@ export const getAllSongs = async () => {
   try {
     const res = await axios.get(`${baseURL}api/songs/getAll`);
     console.log("data", res.data.songs);
-    return res.data.songs;
+    return res?.data.songs;
   } catch (error) {
     console.error("Error fetching songs:", error);
     return null;
@@ -70,7 +70,7 @@ export const getAllSongs = async () => {
 export const getAllAlbums = async () => {
   try {
     const res = await axios.get(`${baseURL}api/albums/getAll`);
-    return res.data;
+    return res?.data;
   } catch (error) {
     return null;
   }
@@ -80,7 +80,7 @@ export const deleteAlbumById = async (albumId) => {
   
   try {
     const res = await axios.delete(`${baseURL}api/albums/delete/${albumId}`);
-    return res.data.album;
+    return res?.data.album;
     
   } catch (error) {
     console.error('Error deleting album:', error);
