@@ -30,7 +30,6 @@ const FilterButtons = ({ filterData, flag }) => {
       dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: name });
     }
   };
-
   return (
     <div className="border border-gray-300 rounded-md px-4 py-1 relative cursor-pointer hover:border-gray-400">
       <p

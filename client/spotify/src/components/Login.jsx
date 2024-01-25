@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { validateUser } from "../api";
 import { actionType } from "../Context/reducer";
 import { useStateValue } from "../Context/StateProvider";
+import styled from 'styled-components';
 
 const Login = ({ setAuth }) => {
   const firebaseAuth = getAuth(app);
@@ -49,29 +50,108 @@ const Login = ({ setAuth }) => {
       navigate("/", { replace: true });
   }, []);
 
-  return (
-    <div className="relative w-screen h-screen">
-      <video
-        src='https://player.vimeo.com/external/311156914.sd.mp4?s=540775b35b49569577ffdb60cd6607e671aca427&profile_id=164&oauth2_token_id=57447761'
-        type="video/mp4"
-        autoPlay
-        muted
-        loop
-        className="w-full h-full object-cover"
-      ></video>
-      <div className="absolute inset-0 bg-darkOverlay flex items-center justify-center p-4">
-        <div className="w-full md:w-375 p-4 bg-lightOverlay shadow-2xl rounded-md backdrop-blur-md flex flex-col items-center justify-center">
-          <div
-            onClick={loginWithGoogle}
-            className="flex items-center justify-center  gap-2 px-4 py-2 rounded-md bg-cardOverlay cursor-pointer hover:bg-card hover:shadow-md duration-100 ease-in-out transition-all"
-          >
-            <FcGoogle className="text-xl" />
-            <p>Signin with Google</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  
+    return (
+      <StyledFullScreenWrapper>
+        <StyledVideo
+          src='https://player.vimeo.com/external/311156914.sd.mp4?s=540775b35b49569577ffdb60cd6607e671aca427&profile_id=164&oauth2_token_id=57447761'
+          type="video/mp4"
+          autoPlay
+          muted
+          loop
+        ></StyledVideo>
+        <StyledOverlay>
+          <StyledContentWrapper>
+               <h1>"Melodies That Rock Your World"</h1>
+            <StyledGoogleButton onClick={loginWithGoogle}>
+              <FcGoogle size={20} />
+              <StyledGoogleButtonText>Sign in with Google</StyledGoogleButtonText>
+            </StyledGoogleButton>
+          </StyledContentWrapper>
+        </StyledOverlay>
+      </StyledFullScreenWrapper>
+    );
+  
 };
+
+
+
+const StyledFullScreenWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+`;
+
+const StyledVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const StyledOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  @media screen and (max-width: 700px) {     
+      width: 100%;
+      margin-left: -113px;
+    }
+`;
+
+const StyledContentWrapper = styled.div`
+  width: 100%;
+  max-width: 75%; /* Adjust the maximum width as needed */
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.9); /* Adjust the background color and opacity */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+   h1{
+     font-size: 20px;
+ 
+     @media screen and (max-width: 700px) {
+      
+      margin-left: -28px;
+      }
+   }
+`;
+
+const StyledGoogleButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #4CAF50; /* Adjust the background color */
+  color: #fff; /* Adjust the text color */
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  @media screen and (max-width: 700px) {
+      
+      margin-left: -28px;
+}
+  &:hover {
+    background-color: #45a049; /* Adjust the hover background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const StyledGoogleButtonText = styled.p`
+  font-size: 14px;
+  line-height: 1.5;
+`;
 
 export default Login;

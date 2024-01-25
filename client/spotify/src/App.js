@@ -17,11 +17,36 @@ import Login from "./components/Login";
 import Loader from "./components/Loader";
 import MusicPlayer from "./components/MusicPlayer";
 import UserProfile from "./components/UserProfile";
-
+import styled from "styled-components";
 import { useStateValue } from "./Context/StateProvider";
 import { actionType } from "./Context/reducer";
 import { motion, AnimatePresence } from "framer-motion";
 
+const MainContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px; /* Set a minimum width for smaller screens */
+`;
+
+const FixedContainer = styled.div`
+  width: 100%;
+  max-width: 700px; /* Set the maximum width for larger screens */
+  height: 6rem;
+  position: fixed;
+  bottom: 0;
+  
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   
+  @media (min-width: 768px) {
+    max-width: 80%; /* Adjust the max-width for larger screens */
+    
+  }
+
+`;
 
 function App() {
   const firebaseAuth = getAuth(app);
@@ -75,7 +100,7 @@ function App() {
 
   return (
     <AnimatePresence>
-      <div className="h-auto flex items-center justify-center min-w-[680px]">
+       <MainContainer>
         {isLoading ||
           (!user && (
             <div className="fixed inset-0 bg-loaderOverlay backdrop-blur-sm ">
@@ -94,12 +119,14 @@ function App() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            className={`fixed min-w-[700px] h-26  inset-x-0 bottom-0  bg-cardOverlay drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}
+            className={`fixed min-w-[700px] h-26  inset-x-0 bottom-0  drop-shadow-2xl backdrop-blur-md flex items-center justify-center`}
           >
-            <MusicPlayer />
+                 <FixedContainer>
+                 <MusicPlayer />
+                 </FixedContainer>
           </motion.div>
         )}
-      </div>
+         </MainContainer>
     </AnimatePresence>
   );
 }

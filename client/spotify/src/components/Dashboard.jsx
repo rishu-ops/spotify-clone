@@ -16,20 +16,13 @@ const Dashboard = () => {
       <Header />
 
       <div className="w-[60%] my-2 p-4 flex items-center justify-evenly">
-        {/* prettier-ignore */}
-        <NavLink to={"/dashboard/home"}><IoHome className="text-2xl text-textColor" /></NavLink>
-        {/* prettier-ignore */}
-        <NavLink to={"/dashboard/user"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Users </NavLink>
+  <NavLink to="/dashboard/home" className="nav-link"><IoHome className="text-2xl text-textColor" /></NavLink>
+  <NavLink to="/dashboard/user" className="nav-link">Users</NavLink>
+  <NavLink to="/dashboard/songs" className="nav-link">Songs</NavLink>
+  <NavLink to="/dashboard/artist" className="nav-link">Artist</NavLink>
+  <NavLink to="/dashboard/albums" className="nav-link">Albums</NavLink>
+     </div>
 
-        {/* prettier-ignore */}
-        <NavLink to={"/dashboard/songs"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Songs </NavLink>
-
-        {/* prettier-ignore */}
-        <NavLink to={"/dashboard/artist"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Artist </NavLink>
-
-        {/* prettier-ignore */}
-        <NavLink to={"/dashboard/albums"} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles }> Albums </NavLink>
-      </div>
 
       <div className="my-4 w-full p-4">
         <Routes>

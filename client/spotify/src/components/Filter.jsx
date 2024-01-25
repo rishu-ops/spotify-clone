@@ -6,6 +6,63 @@ import { filterByLanguage, filters } from "../utils/supportfunctions";
 import FilterButtons from "./FilterButtons";
 import { MdClearAll } from "react-icons/md";
 import { motion } from "framer-motion";
+import styled from 'styled-components';
+
+const FilterContainer = styled.div`
+  width: 100%;
+  margin-top: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+  }
+
+  & .filters {
+
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    @media (max-width: 640px) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+    & p {
+      cursor: pointer;
+      font-size: 1rem;
+      color: ${({ theme }) => theme.text};
+      transition: font-weight 0.2s ease-in-out;
+
+      &:hover {
+        font-weight: 600;
+      }
+
+      &.font-semibold {
+        font-weight: 600;
+      }
+    }
+  
+
+  & .filter-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+
+    @media (max-width: 640px) {
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+`;
 
 const Filter = ({ setFilteredSongs }) => {
   const [{ filterTerm, artists, allAlbums }, dispatch] = useStateValue();
@@ -13,7 +70,7 @@ const Filter = ({ setFilteredSongs }) => {
   useEffect(() => {
     if (!artists) {
       getAllArtist().then((data) => {
-        dispatch({ type: actionType.SET_ARTISTS, artists: data });
+        dispatch({ type: actionType.SET_ARTISTS, artists: data  });
       });
     }
 
@@ -39,36 +96,36 @@ const Filter = ({ setFilteredSongs }) => {
     dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: null });
   };
   return (
-    <div className="w-full my-4 px-6 py-4 flex items-center justify-start md:justify-center gap-10">
-      <FilterButtons filterData={artists} flag={"Artist"} />
-
-      <div className=" flex items-center gap-6 mx-4">
-        {filters?.map((data) => (
+    <FilterContainer>
+      <div className="filters">
+        {filters?.map((data , index) => (
           <p
-            key={data.id}
+            key={index}
             onClick={() => updateFilter(data.value)}
             className={`text-base ${
               data.value === filterTerm ? "font-semibold" : "font-normal"
-            } text-textColor cursor-pointer hover:font-semibold transition-all duration-100 ease-in-out`}
+            } cursor-pointer`}
           >
             {data.name}
           </p>
         ))}
       </div>
 
-      <FilterButtons filterData={allAlbums} flag={"Albums"} />
+      <div className="filter-buttons">
+        <FilterButtons filterData={artists} flag={"Artist"} />
+        <FilterButtons filterData={allAlbums} flag={"Albums"} />
+        <FilterButtons filterData={filterByLanguage} flag={"Language"} />
 
-      <FilterButtons filterData={filterByLanguage} flag={"Language"} />
-
-      <motion.i
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        whileTap={{ scale: 0.75 }}
-        onClick={clearAllFilter}
-      >
-        <MdClearAll className="text-textColor text-xl cursor-pointer" />
-      </motion.i>
-    </div>
+        <motion.i
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          whileTap={{ scale: 0.75 }}
+          onClick={clearAllFilter}
+        >
+          <MdClearAll className="text-textColor text-xl cursor-pointer" />
+        </motion.i>
+      </div>
+    </FilterContainer>
   );
 };
 

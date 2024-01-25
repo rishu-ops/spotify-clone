@@ -36,3 +36,29 @@
       transform: rotate(360deg);
     }
   }
+
+  /* Add this CSS in your stylesheet */
+.nav-link {
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  
+}
+
+@media (max-width: 640px) {
+  .nav-link {
+    padding: 6px;
+  }
+}
+
+
+.textslssf {
+  @media (max-width: 640px) {
+      margin-left: 530px;
+   } 
+}
+

@@ -75,9 +75,9 @@ const DashboardUser = () => {
           </p>
         </div>
 
-        <div className="w-full min-w-[750px] flex items-center justify-between">
+        <div className=" textslssf w-full min-w-[750px] flex items-center justify-between">
           {/* prettier-ignore */}
-          <p className="text-sm text-textColor font-semibold w-275 min-w-[160px] text-center">Image</p>
+          <p className="  text-sm text-textColor  font-semibold w-275 min-w-[160px] text-center">Image</p>
           {/* prettier-ignore */}
           <p className="text-sm text-textColor font-semibold w-275 min-w-[160px] text-center">Name</p>
           {/* prettier-ignore */}
@@ -100,5 +100,6 @@ const DashboardUser = () => {
     </div>
   );
 };
+
 
 export default DashboardUser;
